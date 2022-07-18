@@ -1,0 +1,18 @@
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.horizontal {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.gridCell {
+    flex: 1;
+    aspect-ratio: 1/1;
+    background-color: grey;
+    outline: solid navy;
+} 

@@ -1,18 +1,42 @@
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button.changeGrid {
+    padding: 16px;
+    border-radius: 10px;
+}
+
+.grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .container {
-    height: 100vh;
+    background-color: grey;
+    margin: 64px;
+    height: 700px;
+    width: 700px;
     display: flex;
     flex-direction: column;
 }
 
 .horizontal {
-    display: flex;
     height: 100%;
     width: 100%;
+    display: flex;
 }
 
 .gridCell {
-    flex: 1;
-    aspect-ratio: 1/1;
-    background-color: grey;
-    outline: solid navy;
+    height: 100%;
+    width: 100%;
+    /* background-color: grey; */
+    /* outline: solid navy; */
 } 
+
+.gridCell.hovered {
+    background-color: yellow;
+}

@@ -1,21 +1,46 @@
-.header {
+.main-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.inside-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-button.changeGrid {
-    padding: 16px;
-    border-radius: 10px;
+.selections {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.slider-container {
+    display: flex;
+}
+
+.sliderText {
+    font: bold 16px Georgia;
+    margin-right: 16px;
+}
+
+.sketch-type-buttons, .preferences-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+button {
+    background-color: #0476aa;
+    border: none;
+    border-radius: 32px;
+    color: white;
+    padding: 20px;
+    font-size: 16px;
 }
 
 .grid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.container {
     background-color: grey;
     margin: 64px;
     height: 700px;
@@ -24,7 +49,7 @@ button.changeGrid {
     flex-direction: column;
 }
 
-.horizontal {
+.row {
     height: 100%;
     width: 100%;
     display: flex;
@@ -33,10 +58,19 @@ button.changeGrid {
 .gridCell {
     height: 100%;
     width: 100%;
-    /* background-color: grey; */
-    /* outline: solid navy; */
-} 
+}
 
-.gridCell.hovered {
-    background-color: yellow;
+.drawing-preference {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.preferences-information {
+    font: bold 16px Georgia;
+}
+
+.miscellaneous-buttons {
+    display: flex;
+    justify-content: center;
 }

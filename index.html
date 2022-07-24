@@ -8,14 +8,33 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="slider">
-        <p class="sliderText">Change Grid Size</p>
-        <input type="range" min="1" max="100" value="16" class="changeSize">
-        <output class="output">16</output>
-    </div>
-    <div class="grid">
-        <div class="container"></div>
-    </div>
+    <div class="main-container">
+        <div class="inside-container">
+            <div class="selections">
+                <div class="slider-container">
+                    <div class="sliderText">Grid Size</div>
+                    <input type="range" min="1" max="100" value="16" class="slider">
+                    <output class="output">16</output>
+                </div>
+                <div class="sketch-type-buttons">
+                    <button id="custom-color">Set Custom Ink Color</button>
+                    <button id="rainbow">Rainbow Mode</button>
+                    <button id="rainbow-fade">Rainbow (Fade) Mode</button>
+                    <button id="rtb">Rainbow to Black Mode</button>
+                </div>
+            </div>
+            <div class="grid"></div>
+            <div class="drawing-preference">
+                <div class="preferences-information">Drawing Preferences</div>
+                <div class="preferences-buttons">
+                    <button id="click">Click</button>
+                    <button id="hover">Hover</button>
+                </div>
+            </div>
+        </div>
+        <div class="miscellaneous-buttons">
+            <button id="change-background">Change Background Color</button>
+        </div>
     <script src="main.js" defer></script>
 </body>
 </html>

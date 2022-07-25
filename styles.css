@@ -1,3 +1,7 @@
+input, button {
+    cursor: pointer;
+}
+
 .main-container {
     display: flex;
     flex-direction: column;
@@ -16,19 +20,40 @@
     gap: 32px;
 }
 
+.informational-text {
+    font: bold 16px Helvetica;
+    margin: auto;
+}
+
 .slider-container {
     display: flex;
 }
 
-.sliderText {
-    font: bold 16px Georgia;
+.slider-text {
     margin-right: 16px;
+}
+
+.color-picker-container, .change-background-container, .change-ink-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.color-picker-container {
+    gap: 16px;
 }
 
 .sketch-type-buttons, .preferences-buttons {
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+
+input[type='color'] {
+    border: none;
+    height: 70px;
+    width: 70px;
+    padding: 0;
+    margin: auto;
 }
 
 button {
@@ -41,7 +66,7 @@ button {
 }
 
 .grid {
-    background-color: grey;
+    background-color: #808080;
     margin: 64px;
     height: 700px;
     width: 700px;
@@ -66,11 +91,7 @@ button {
     gap: 32px;
 }
 
-.preferences-information {
-    font: bold 16px Georgia;
-}
-
-.miscellaneous-buttons {
+.bottom-preferences {
     display: flex;
-    justify-content: center;
+    align-items: center;
 }

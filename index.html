@@ -12,12 +12,21 @@
         <div class="inside-container">
             <div class="selections">
                 <div class="slider-container">
-                    <div class="sliderText">Grid Size</div>
+                    <div class="slider-text informational-text">Grid Size</div>
                     <input type="range" min="1" max="100" value="16" class="slider">
                     <output class="output">16</output>
                 </div>
+                <div class="color-picker-container">
+                    <div class="change-background-container">
+                        <div class="change-background-text informational-text">Change Background Color</div>
+                        <input class="change-background" type="color" value="#808080">
+                    </div>
+                    <div class="change-ink-container">
+                        <div class="custom-color-text informational-text">Set Custom Ink Color</div>
+                        <input class="change-ink" type="color">
+                    </div>
+                </div>
                 <div class="sketch-type-buttons">
-                    <button id="custom-color">Set Custom Ink Color</button>
                     <button id="rainbow">Rainbow Mode</button>
                     <button id="rainbow-fade">Rainbow (Fade) Mode</button>
                     <button id="rtb">Rainbow to Black Mode</button>
@@ -25,15 +34,12 @@
             </div>
             <div class="grid"></div>
             <div class="drawing-preference">
-                <div class="preferences-information">Drawing Preferences</div>
+                <div class="preferences-information informational-text">Drawing Preferences</div>
                 <div class="preferences-buttons">
                     <button id="click">Click</button>
                     <button id="hover">Hover</button>
                 </div>
             </div>
-        </div>
-        <div class="miscellaneous-buttons">
-            <button id="change-background">Change Background Color</button>
         </div>
     <script src="main.js" defer></script>
 </body>

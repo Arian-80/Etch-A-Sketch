@@ -10,16 +10,15 @@ function monitorSliderValue() {
     slider.addEventListener('change', function () {
         size = slider.value; 
         if (size <= 100) {
-            output.value = size;
+            output.value = `${size} x ${size}`;
             currentSize = size;
-            makeGrid(size, currentMode);
+            makeGrid(size);
         }
     });
 }
 
-function makeGrid(sideSize, mode) {
+function makeGrid(sideSize) {
     if (!sideSize) return;
-    currentMode = mode;
     const grid = document.querySelector('.grid');
 
     removeChildren(grid);
@@ -34,12 +33,12 @@ function makeGrid(sideSize, mode) {
             currentCell = document.createElement('div');
             currentCell.classList.add('gridCell');
             horizontalDiv.appendChild(currentCell);
-            addHoverListener(currentCell, mode);
+            addHoverListener(currentCell);
         }
     }
 }
 
-function addHoverListener(node, mode) {
+function addHoverListener(node) {
     let accumulators = [];
     node.addEventListener('mouseover', e => {
         if (clickMode) {
@@ -47,33 +46,38 @@ function addHoverListener(node, mode) {
                 return;
             }
         }
-        switch (mode) {
+        switch (currentMode) {
             case 'rainbow':
-                rainbow(e, accumulators);
+                paintRainbow(e, accumulators);
                 break;
             case 'rtb':
-                accumulators = rainbowToBlack(e, accumulators);
+                accumulators = paintRainbowToBlack(e, accumulators);
                 break;
             case 'rainbow-fade':
-                rainbowFade(e, accumulators);
+                paintRainbowFade(e, accumulators);
                 break;
-            default:
-                customInk(e, mode);
+            case 'single-ink':
+                paintCustomInk(e, 'input.current-color');
+                break;
+            case 'eraser':
+                paintCustomInk(e, 'input.current-background');
+                break;
         }
     });
 }
 
-function customInk(e, color) {
+function paintCustomInk(e, wheel) {
     const node = e.target;
+    const color = document.querySelector(wheel).value;
     node.style.backgroundColor = color;
 }
 
-function rainbow(e) {
+function paintRainbow(e) {
     const node = e.target;
     node.style.backgroundColor = `rgb(${getRandom256()}, ${getRandom256()}, ${getRandom256()})`;
 }
 
-function rainbowToBlack(e, rates) {
+function paintRainbowToBlack(e, rates) {
     const node = e.target;
     let r, g, b, rRate, gRate, bRate;
     const rgbValues = getBackgroundColorPart(node, "r", "g", "b");
@@ -89,15 +93,15 @@ function rainbowToBlack(e, rates) {
     else {
         [rRate, gRate, bRate] = rates;
         [r, g, b] = rgbValues;
-        r > 0 && (r = (r-rRate).toFixed(1));
-        g > 0 && (g = (g-gRate).toFixed(1));
-        b > 0 && (b = (b-bRate).toFixed(1));
+        r > 0 && (r = r-rRate);
+        g > 0 && (g = g-gRate);
+        b > 0 && (b = b-bRate);
         node.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
     }
     return [rRate, gRate, bRate];
 }
 
-function rainbowFade(e) {
+function paintRainbowFade(e) {
     const node = e.target;
     const alphaValue = getBackgroundColorPart(node, "a");
     node.style.backgroundColor = `rgba(${getRandom256()}, ${getRandom256()}, ${getRandom256()}, ${alphaValue < 1 ? +alphaValue + 0.1 : 1})`;
@@ -161,7 +165,10 @@ function handleClickFlags(buttonType) {
 }
 
 function handleGameModeChange(gameMode) {
-    const currentMode = gameMode;
+    currentMode = gameMode;
+}
+
+function eraseBoard() {
     makeGrid(currentSize, currentMode);
 }
 
@@ -174,17 +181,21 @@ function createButtonListener(listenerFunction, ...buttons) {
 function createAllButtonListeners() {
     const clickButton = document.querySelector('button#click');
     const hoverButton = document.querySelector('button#hover');
+    const singleInkButton = document.querySelector('button#single-ink');
     const rainbowButton = document.querySelector('button#rainbow');
     const rainbowFadeButton = document.querySelector('button#rainbow-fade');
     const rtbButton = document.querySelector('button#rtb');
+    const eraserButton = document.querySelector('button#eraser');
+    const eraseBoardButton = document.querySelector('button#erase-board');
     createButtonListener(handleClickFlags, clickButton, hoverButton);
-    createButtonListener(handleGameModeChange, rainbowButton, rainbowFadeButton, rtbButton);
+    createButtonListener(handleGameModeChange, singleInkButton, rainbowButton, rainbowFadeButton, rtbButton, eraserButton);
+    createButtonListener(eraseBoard, eraseBoardButton);
 }
 
 function monitorBGColorWheel() {
-    const backgroundColorWheel = document.querySelector('input.change-background');
+    const backgroundColorWheel = document.querySelector('input.current-background');
     const grid = document.querySelector('.grid');
-    backgroundColorWheel.addEventListener('change', () => changeBackgroundColour(grid, backgroundColorWheel.value));
+    backgroundColorWheel.addEventListener('change', () => (grid, backgroundColorWheel.value));
 }
 
 function changeBackgroundColour(grid, colour) {
@@ -192,18 +203,16 @@ function changeBackgroundColour(grid, colour) {
 }
 
 function monitorInkColorWheel() {
-    const inkColorWheel = document.querySelector('input.change-ink');
-    inkColorWheel.addEventListener('change', () => makeGrid(currentSize, inkColorWheel.value));
-} 
+    const inkColorWheel = document.querySelector('input.current-color');
+    inkColorWheel.addEventListener('change', () => handleGameModeChange('single-ink'));
+}
 
 function main() {
     monitorSliderValue();
     createAllButtonListeners();
-    makeGrid(16, currentMode);
+    makeGrid(currentSize, currentMode);
     monitorBGColorWheel();
     monitorInkColorWheel();
-    // Erase board
-    // Custom slider
 }
 
 

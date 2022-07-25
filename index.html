@@ -14,22 +14,27 @@
                 <div class="slider-container">
                     <div class="slider-text informational-text">Grid Size</div>
                     <input type="range" min="1" max="100" value="16" class="slider">
-                    <output class="output">16</output>
+                    <output class="output">16 x 16</output>
                 </div>
                 <div class="color-picker-container">
                     <div class="change-background-container">
                         <div class="change-background-text informational-text">Change Background Color</div>
-                        <input class="change-background" type="color" value="#808080">
+                        <input class="current-background" type="color" value="#808080">
                     </div>
                     <div class="change-ink-container">
                         <div class="custom-color-text informational-text">Set Custom Ink Color</div>
-                        <input class="change-ink" type="color">
+                        <input class="current-color" type="color">
                     </div>
                 </div>
                 <div class="sketch-type-buttons">
+                    <button id="single-ink">Single Ink Mode</button>
                     <button id="rainbow">Rainbow Mode</button>
                     <button id="rainbow-fade">Rainbow (Fade) Mode</button>
                     <button id="rtb">Rainbow to Black Mode</button>
+                    <button id="eraser">Eraser</button>
+                </div>
+                <div class="erase-board-button-container">
+                    <button id="erase-board">Erase Board</button>
                 </div>
             </div>
             <div class="grid"></div>
@@ -41,6 +46,7 @@
                 </div>
             </div>
         </div>
+    </div>
     <script src="main.js" defer></script>
 </body>
 </html>
